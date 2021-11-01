@@ -1,13 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function task({ task }) {
+function Item({ item, updateTask, deleteTask }) {
   return (
     <div>
-      <input type="checkbox" />
-      <spam>{task.text}</spam>
-      <button type="button">Apagar</button>
+      <input
+        type="checkbox"
+        checked={!item.active}
+        onClick={() => { updateTask({ ...item, active: !item.active }); }}
+      />
+      <spam>{item.text}</spam>
+      <button type="button" onClick={() => { deleteTask(item); }}>Apagar</button>
     </div>
   );
 }
 
-export default task;
+Item.propTypes = {
+  item: PropTypes.object,
+}.isRequired;
+
+export default Item;
