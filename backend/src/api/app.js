@@ -5,7 +5,7 @@ const toDoRouter = require('../routes/toDoRouter');
 const app = express();
 app.use(bodyParser.json());
 
-const PORT = 3001;
+const PORT = 3000;
 
 app.use('/todo', toDoRouter); 
 

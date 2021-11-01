@@ -3,7 +3,7 @@ const toDoModel = require('../models/toDoModel');
 function validateTask(taskObj) {
   const { text, active, edit } = taskObj;
   if (!text || !active || !edit) {
-    return { message: 'Dados Inválidos' };
+    return { message: 'Dados inválidos. Tente Novamente' };
   }
   return false;
 }  
@@ -11,7 +11,7 @@ function validateTask(taskObj) {
 async function validateId(id) {
   const idValidate = await toDoModel.getTaskById(id);
   if (idValidate === null) {
-    return { message: 'Id Invalido ou não encontrado' };
+    return { message: 'Id inválido ou não encontrado' };
   }
   return false;
 }
@@ -22,11 +22,9 @@ async function getAllTasks() {
 }
 
 async function createTask(taskObj) {
-  const validate = validateTask(taskObj);
-  if (validate.error) {
-    return validate;
-  }
-  const result = toDoModel.createTask(taskObj);
+  const entriesValid = validateTask(taskObj);
+  if (entriesValid.message) return entriesValid;
+  const result = await toDoModel.createTask(taskObj);
   return result;
 }
 

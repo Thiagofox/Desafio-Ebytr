@@ -24,11 +24,14 @@ async function getTaskById(req, res) {
 async function createTask(req, res) {
   try {
     const taskObj = req.body;
-    await toDoService.createTask(taskObj);
+    const data = await toDoService.createTask(taskObj);
+    if (data.message) {
+      return res.status(400).json(data);
+    }
     return res.status(201).json({ message: 'Task criada com sucesso' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'erro ao criar os dados' });
+    return res.status(500).json({ message: 'Erro ao criar os dados' });
   }
 }
 
@@ -44,7 +47,7 @@ async function updateTask(req, res) {
     return res.status(200).json({ message: 'Task editada com sucesso' });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'erro ao editar os dados' });
+    return res.status(500).json({ message: 'Erro ao editar os dados' });
   }
 }
 
