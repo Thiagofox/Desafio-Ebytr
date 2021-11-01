@@ -1,39 +1,80 @@
-import React, { useState } from 'react';
-import Task from './components/task';
+import React, { useState, useEffect } from 'react';
+import Item from './components/task';
 
 function App() {
-  const [itens, setItens] = useState(
-    [
-      {
-        _id: '617fd3d55837f479a694d5aa',
-        text: 'Tarefa 1',
-        active: 'true',
-        edit: 'false',
-      },
-      {
-        _id: '617fd3d95837f479a694d5ab',
-        text: 'Tarefa 2',
-        active: 'true',
-        edit: 'false',
-      },
-    ],
+  const [itens, setItens] = useState([]);
+  const [filterlist, setFilterList] = useState({ filter: false, active: false });
 
-  );
-
-  function getAllTasks(){
-    fetch
+  function getAllTasks() {
+    fetch('http://localhost:3000/todo/get/', { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => setItens(data));
   }
+
+  function createTask() {
+    fetch('http://localhost:3000/todo/post/',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: '', active: true }),
+      })
+      .then((response) => response.json())
+      .then(() => getAllTasks());
+  }
+
+  const updateTask = (item) => {
+    fetch('http://localhost:3000/todo/edit/',
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item),
+      })
+      .then((response) => response.json())
+      .then(() => getAllTasks());
+  };
+
+  const deleteTask = (item) => {
+    fetch('http://localhost:3000/todo/remove/',
+      {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item),
+      })
+      .then((response) => response.json())
+      .then(() => getAllTasks());
+  };
+
+  useEffect(() => {
+    getAllTasks();
+  }, []);
+
+  const showListItens = filterlist.filter
+    ? itens.filter((aux) => aux.active === filterlist.active)
+    : itens;
+
   return (
-    <div className="all">
-      <h1>To Do App</h1>
+    <div className="to_do">
+      <div className="to_do_all">
 
-      {itens.map((item) => <Task task={item} />)}
+        <h1>To Do App</h1>
+        {showListItens.map((item) => (
+          <Item
+            item={item}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+          />
+        ))}
+        <div className="buttons">
+          <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
+          <button type="button" onClick={() => setFilterList({ filter: true, active: true })}>Pendentes</button>
+          <button type="button" onClick={() => setFilterList({ filter: true, active: false })}>concluidos</button>
+        </div>
 
-      <button type="button">Todos</button>
-      <button type="button">concluidos</button>
-      <button type="button">Pendentes</button>
+        <div className="buttons">
+          <button type="button" onClick={createTask}>Inserir Nova Task</button>
+        </div>
 
-      <button type="button">Inserir Nova Task</button>
+      </div>
     </div>
   );
 }
