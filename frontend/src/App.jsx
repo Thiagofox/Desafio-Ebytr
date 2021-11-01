@@ -3,6 +3,7 @@ import Item from './components/task';
 
 function App() {
   const [itens, setItens] = useState([]);
+  const [filterlist, setFilterList] = useState({ filter: false, active: false });
 
   function getAllTasks() {
     fetch('http://localhost:3000/todo/get/', { method: 'GET' })
@@ -47,11 +48,15 @@ function App() {
     getAllTasks();
   }, []);
 
+  // const showListItens = filterlist.filter
+  //   ? itens.filter((aux) => aux.active === filterlist.active)
+  //   : itens;
+
   return (
     <div className="all">
       <h1>To Do App</h1>
 
-      {itens.map((item) => (
+      {showListItens.map((item) => (
         <Item
           item={item}
           updateTask={updateTask}
@@ -59,7 +64,7 @@ function App() {
         />
       ))}
 
-      <button type="button">Todos</button>
+      {/* <button type="button" onClick={setFilterList({ filter: false })}>Todos</button> */}
       <button type="button">concluidos</button>
       <button type="button">Pendentes</button>
 
