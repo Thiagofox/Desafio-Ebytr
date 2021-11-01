@@ -1,6 +1,7 @@
 const toDoModel = require('../models/toDoModel');
 
 function validateTask(taskObj) {
+  console.log(taskObj);
   const { text, active, edit } = taskObj;
   if (!text || !active || !edit) {
     return { error: 'Dados Inválidos' };

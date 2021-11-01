@@ -12,7 +12,8 @@ async function getAllTasks(_req, res) {
 
 async function createTask(req, res) {
   try {
-    const { taskObj } = req.body;
+    const taskObj = req.body;
+    console.log(taskObj);
     await toDoService.createTask(taskObj);
     return res.status(201).json({ message: 'criado com sucesso' });
   } catch (error) {

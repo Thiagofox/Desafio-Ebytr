@@ -6,7 +6,7 @@ async function getAllTasks() {
   return data;
 }
 
-async function createTasks(taskObj) {
+async function createTask(taskObj) {
   const db = await mongoConnection.connection();
   const data = await db.collection('tasks').insertOne(taskObj);
   console.log(data);
@@ -15,5 +15,5 @@ async function createTasks(taskObj) {
 
 module.exports = {
   getAllTasks,
-  createTasks,
+  createTask,
 };
