@@ -23,7 +23,6 @@ async function createTask(req, res) {
 
 async function updateTask(req, res) {
   try {
-    console.log('aqui');
     const taskObj = req.body;
     const data = await toDoService.updateTask(taskObj);
     return res.send(data);

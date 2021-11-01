@@ -5,7 +5,7 @@ function Item({ item, updateTask, deleteTask }) {
   const [tempText, setTempText] = useState([]);
 
   return (
-    <div>
+    <div className="tasks_container">
       <input
         type="checkbox"
         checked={!item.active}

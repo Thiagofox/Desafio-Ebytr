@@ -53,22 +53,28 @@ function App() {
     : itens;
 
   return (
-    <div className="all">
-      <h1>To Do App</h1>
+    <div className="to_do">
+      <div className="to_do_all">
 
-      {showListItens.map((item) => (
-        <Item
-          item={item}
-          updateTask={updateTask}
-          deleteTask={deleteTask}
-        />
-      ))}
+        <h1>To Do App</h1>
+        {showListItens.map((item) => (
+          <Item
+            item={item}
+            updateTask={updateTask}
+            deleteTask={deleteTask}
+          />
+        ))}
+        <div className="buttons">
+          <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
+          <button type="button" onClick={() => setFilterList({ filter: true, active: true })}>Pendentes</button>
+          <button type="button" onClick={() => setFilterList({ filter: true, active: false })}>concluidos</button>
+        </div>
 
-      <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
-      <button type="button" onClick={() => setFilterList({ filter: false, active: true })}>Pendentes</button>
-      <button type="button" onClick={() => setFilterList({ filter: false, active: false })}>concluidos</button>
+        <div className="buttons">
+          <button type="button" onClick={createTask}>Inserir Nova Task</button>
+        </div>
 
-      <button type="button" onClick={createTask}>Inserir Nova Task</button>
+      </div>
     </div>
   );
 }
