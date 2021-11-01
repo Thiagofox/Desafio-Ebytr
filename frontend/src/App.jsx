@@ -48,9 +48,9 @@ function App() {
     getAllTasks();
   }, []);
 
-  // const showListItens = filterlist.filter
-  //   ? itens.filter((aux) => aux.active === filterlist.active)
-  //   : itens;
+  const showListItens = filterlist.filter
+    ? itens.filter((aux) => aux.active === filterlist.active)
+    : itens;
 
   return (
     <div className="all">
@@ -64,9 +64,9 @@ function App() {
         />
       ))}
 
-      {/* <button type="button" onClick={setFilterList({ filter: false })}>Todos</button> */}
-      <button type="button">concluidos</button>
-      <button type="button">Pendentes</button>
+      <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
+      <button type="button" onClick={() => setFilterList({ filter: false, active: true })}>Pendentes</button>
+      <button type="button" onClick={() => setFilterList({ filter: false, active: false })}>concluidos</button>
 
       <button type="button" onClick={createTask}>Inserir Nova Task</button>
     </div>
