@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const toDoController = require('../controllers/toDoControler');
+const validateId = require('../api/middlewares/validateId');
 
 router.get('/get', toDoController.getAllTasks);
-router.get('/get/:id', toDoController.getTaskById);
 router.post('/post', toDoController.createTask);
-router.put('/edit/:id', toDoController.updateTask);
-router.delete('/remove/:id', toDoController.deleteTask);
+router.put('/edit', validateId.idValidation, toDoController.updateTask);
+router.delete('/remove', validateId.idValidation, toDoController.deleteTask);
 
 module.exports = router;
