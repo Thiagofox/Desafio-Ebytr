@@ -11,6 +11,18 @@ function App() {
       .then((data) => setItens(data));
   }
 
+  function getAllTasksAlphaSorted() {
+    fetch('http://localhost:3000/todo/get/alphasorted', { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => setItens(data));
+  }
+
+  function getAllTasksDateSorted() {
+    fetch('http://localhost:3000/todo/get/datesort', { method: 'GET' })
+      .then((response) => response.json())
+      .then((data) => setItens(data));
+  }
+
   function createTask() {
     fetch('http://localhost:3000/todo/post/',
       {
@@ -68,6 +80,8 @@ function App() {
           <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
           <button type="button" onClick={() => setFilterList({ filter: true, active: true })}>Pendentes</button>
           <button type="button" onClick={() => setFilterList({ filter: true, active: false })}>concluidos</button>
+          <button type="button" onClick={() => getAllTasksAlphaSorted()}>ABC</button>
+          <button type="button" onClick={() => getAllTasksDateSorted()}>Recentes</button>
         </div>
 
         <div className="buttons">

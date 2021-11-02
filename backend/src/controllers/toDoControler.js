@@ -1,12 +1,34 @@
 const toDoService = require('../services/toDoService');
 
+const commonError = 'Erro ao buscar os dados';
+
 async function getAllTasks(_req, res) {
   try {
     const data = await toDoService.getAllTasks();
     return res.send(data);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'Erro ao buscar os dados' });
+    return res.status(500).json({ message: commonError });
+  }
+}
+
+async function getAllTasksAlphaSorted(_req, res) {
+  try {
+    const data = await toDoService.getAllTasksAlphaSorted();
+    return res.send(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: commonError });
+  }
+}
+
+async function getAllTasksDateSorted(_req, res) {
+  try {
+    const data = await toDoService.getAllTasksDateSorted();
+    return res.send(data);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: commonError });
   }
 }
 
@@ -45,6 +67,8 @@ async function deleteTask(req, res) {
   
 module.exports = {
   getAllTasks,
+  getAllTasksAlphaSorted,
+  getAllTasksDateSorted,
   createTask,
   updateTask,
   deleteTask,
