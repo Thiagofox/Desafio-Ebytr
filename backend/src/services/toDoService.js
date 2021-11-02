@@ -5,6 +5,16 @@ async function getAllTasks() {
   return data;
 }
 
+async function getAllTasksAlphaSorted() {
+  const data = toDoModel.getAllTasksAlphaSorted();
+  return data;
+}
+
+async function getAllTasksDateSorted() {
+  const data = toDoModel.getAllTasksDateSorted();
+  return data;
+}
+
 async function createTask(taskObj) {
   const result = await toDoModel.createTask(taskObj);
   return result;
@@ -22,6 +32,8 @@ async function deleteTask(taskObj) {
 
 module.exports = {
   getAllTasks,
+  getAllTasksAlphaSorted,
+  getAllTasksDateSorted,
   createTask,
   updateTask,
   deleteTask,
