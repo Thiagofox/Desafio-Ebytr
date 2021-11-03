@@ -79,13 +79,13 @@ function App() {
         <div className="buttons">
           <button type="button" onClick={() => setFilterList({ filter: false })}>Todos</button>
           <button type="button" onClick={() => setFilterList({ filter: true, active: true })}>Pendentes</button>
-          <button type="button" onClick={() => setFilterList({ filter: true, active: false })}>concluidos</button>
-          <button type="button" onClick={() => getAllTasksAlphaSorted()}>ABC</button>
+          <button type="button" onClick={() => setFilterList({ filter: true, active: false })}>Concluídos</button>
+          <button type="button" onClick={() => getAllTasksAlphaSorted()}>A-B-C</button>
           <button type="button" onClick={() => getAllTasksDateSorted()}>Recentes</button>
         </div>
 
         <div className="buttons">
-          <button type="button" onClick={createTask}>Inserir Nova Task</button>
+          <button type="button" onClick={createTask}>Inserir nova tarefa</button>
         </div>
 
       </div>

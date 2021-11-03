@@ -7,6 +7,7 @@ function Item({ item, updateTask, deleteTask }) {
   return (
     <div className="tasks_container">
       <input
+        data-testid="input-checkbox"
         type="checkbox"
         checked={!item.active}
         onClick={() => { updateTask({ ...item, active: !item.active }); }}
@@ -14,6 +15,7 @@ function Item({ item, updateTask, deleteTask }) {
       {((item.edit) || item.text === '')
         ? (
           <input
+            data-testid="input-test"
             type="text"
             placeholder={item.text}
             onChange={(event) => { setTempText(event.target.value); }}
