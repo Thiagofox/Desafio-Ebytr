@@ -1,23 +1,28 @@
+// Importadação do connection que permite a utilização de funções do Mongo no código
 const mongoConnection = require('./connection');
 
+// Função que faz uma querry para o banco buscando as tarefas
 async function getAllTasks() {
   const db = await mongoConnection.connection();
   const data = await db.collection('tasks').find().toArray();
   return data;
 }
 
+// Função que faz uma querry para o banco buscando as tarefas em ordem alfabética
 async function getAllTasksAlphaSorted() {
   const db = await mongoConnection.connection();
   const data = await db.collection('tasks').find().sort({ text: 1 }).toArray();
   return data;
 }
 
+// Função que faz uma querry para o banco buscando as tarefas mais recentes
 async function getAllTasksDateSorted() {
   const db = await mongoConnection.connection();
   const data = await db.collection('tasks').find().sort({ date: -1 }).toArray();
   return data;
 }
 
+// Função que faz uma querry para o banco inserindo os dados no banco
 async function createTask(taskObj) {
   const { text, active } = taskObj;
   const date = new Date();
@@ -26,6 +31,7 @@ async function createTask(taskObj) {
   return data;
 }
 
+// Função que faz uma querry para o banco editar os dados no banco
 async function updateTask(taskObj) {
   const { _id } = taskObj;
   const db = await mongoConnection.connection();
@@ -36,6 +42,7 @@ async function updateTask(taskObj) {
   return data;
 }
 
+// Função que faz uma querry para o banco deletar os dados no banco
 async function deleteTask(taskObj) {
   const { _id } = taskObj;
   const db = await mongoConnection.connection();
