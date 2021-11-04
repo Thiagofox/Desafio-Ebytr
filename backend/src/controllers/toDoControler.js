@@ -1,7 +1,9 @@
+// Importadação das funções do toDoService para serem utilizadas no controller
 const toDoService = require('../services/toDoService');
 
 const commonError = 'Erro ao buscar os dados';
 
+// Função de controle para buscar todas as tarefas
 async function getAllTasks(_req, res) {
   try {
     const data = await toDoService.getAllTasks();
@@ -12,6 +14,7 @@ async function getAllTasks(_req, res) {
   }
 }
 
+// Função de controle para buscar todas as tarefas em ordem alfabética
 async function getAllTasksAlphaSorted(_req, res) {
   try {
     const data = await toDoService.getAllTasksAlphaSorted();
@@ -22,6 +25,7 @@ async function getAllTasksAlphaSorted(_req, res) {
   }
 }
 
+// Função de controle para buscar todas as tarefas mais recentes
 async function getAllTasksDateSorted(_req, res) {
   try {
     const data = await toDoService.getAllTasksDateSorted();
@@ -32,6 +36,7 @@ async function getAllTasksDateSorted(_req, res) {
   }
 }
 
+// Função de controle para criar uma tarefa
 async function createTask(req, res) {
   try {
     const taskObj = req.body;
@@ -42,7 +47,7 @@ async function createTask(req, res) {
     return res.status(500).json({ message: 'Erro ao criar os dados' });
   }
 }
-
+// Função de controle para editar uma tarefa
 async function updateTask(req, res) {
   try {
     const taskObj = req.body;
@@ -53,7 +58,7 @@ async function updateTask(req, res) {
     return res.status(500).json({ message: 'Erro ao editar os dados' });
   }
 }
-
+// Função de controle para deletar uma tarefa
 async function deleteTask(req, res) {
   try {
     const taskObj = req.body;

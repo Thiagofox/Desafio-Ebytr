@@ -1,5 +1,8 @@
+// Importações das ferramentas necessárias
+
 const express = require('express');
 const bodyParser = require('body-parser');
+// Cors para ligação Front + Back
 const cors = require('cors');
 const toDoRouter = require('../routes/toDoRouter');
 
@@ -8,12 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// const PORT = 3000;
-
+// Rota principal da API
 app.use('/todo', toDoRouter); 
-
-// app.listen(PORT, () => {
-//   console.log(`Ouvindo na porta-> ${PORT}`);
-// });
 
 module.exports = app;

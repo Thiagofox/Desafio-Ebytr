@@ -1,3 +1,4 @@
+// Arquivo com as configurações padroes para conexão e utilização dos metodos do MongoDb
 const { MongoClient } = require('mongodb');
 
 const OPTIONS = {
